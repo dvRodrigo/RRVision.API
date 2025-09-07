@@ -1,0 +1,6 @@
+@RRVision.API_HostAddress = http://localhost:5105
+
+GET {{RRVision.API_HostAddress}}/api/ocr/
+Accept: application/json
+
+###
