@@ -17,11 +17,19 @@ namespace RRVision.API.Controllers.v1
             _mediator = mediator;
         }
 
-        [HttpPost("process-file")]
+        [HttpPost("extract-text")]
         [Consumes("multipart/form-data")]
-        public async Task<IActionResult> PostTextFile([FromForm] ProcessFileRequest request)
+        public async Task<IActionResult> ExtractFromFile([FromForm] ProcessFileRequest request)
         {
-            var command = new ProcessFileWithOcrCommand(request.File, request.Description);
+            var command = new ProcessFileOcrCommand(request.File);
+            var result = await _mediator.Send(command);
+            return Ok(new { Text = result });
+        }
+        [HttpPost("extract-text-base64")]
+        [Consumes("application/json")]
+        public async Task<IActionResult> ExtractFromBase64(string base64)
+        {
+            var command = new ProcessFileBase64OcrCommand(base64);
             var result = await _mediator.Send(command);
             return Ok(new { Text = result });
         }

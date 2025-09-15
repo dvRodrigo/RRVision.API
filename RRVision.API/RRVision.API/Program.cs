@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR(cfg =>
 {
-    cfg.RegisterServicesFromAssemblyContaining<ProcessFileWithOcrCommandHandler>();
+    cfg.RegisterServicesFromAssemblyContaining<ProcessFileOcrCommandHandler>();
 });
 
 var app = builder.Build();
